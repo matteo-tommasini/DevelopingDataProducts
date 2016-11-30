@@ -1,0 +1,70 @@
+---
+title: "First assignment of the 'Developing Data Products' course on Coursera"
+author: "Matteo Tommasini"
+date: "November 30, 2016"
+output: html_document
+---
+
+See the description of the assigment at the following [link](https://www.coursera.org/learn/data-products/peer/NLn0H/r-markdown-and-leaflet).
+
+```{r, echo = FALSE}
+library(leaflet)
+library(maps)
+
+url <- "https://gist.githubusercontent.com/mbostock/9535021/raw/902265051e775cd35a6aa6307a23070f739ebed1/us-state-capitals.csv"
+
+download.file(url, dest = "us_states.csv", method = "curl")
+
+us_states <- read.csv("us_states.csv")
+
+df <- data.frame(lat = us_states$latitude, lng = us_states$longitude) 
+
+mapStates = map("state", fill = TRUE, plot = FALSE)
+mapCounty = map("county", fill = TRUE, plot = FALSE)
+
+df %>%
+  leaflet() %>%
+  addProviderTiles("Stamen.Watercolor",
+                   options = providerTileOptions(noWrap = TRUE)) %>%
+  addPolygons(lng = mapStates$x,
+              lat = mapStates$y,
+              fillColor = rainbow(51, alpha = NULL), 
+              stroke = FALSE) %>%
+  addMarkers(popup = us_states$name) %>%
+  setView(lat = 39.18672, lng = -82.87537, zoom = 5)
+```
+
+In case you're interested, the markers for this map are positioned on the capitals of the US States, and are obtained from the dataset at the following [link]("https://gist.githubusercontent.com/mbostock/9535021/raw/902265051e775cd35a6aa6307a23070f739ebed1/us-state-capitals.csv"). The coloring of the map is obtained using the type of "ProviderTile" known as "Watercolor", that was released under the following Creative Common Attribution license:
+
+*Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL*
+
+and is part of any recent version of `leaflet`. If you like it, you can find more details on this on the [Stamen website](http://maps.stamen.com), in particular on the following [report in pdf](http://studio.stamen.com/open/where-stamen-rodenbeck.pdf).
+
+The code creating the chart above is the following:
+
+```{r, echo = TRUE, eval = FALSE}
+library(leaflet)
+library(maps)
+
+url <- "https://gist.githubusercontent.com/mbostock/9535021/raw/902265051e775cd35a6aa6307a23070f739ebed1/us-state-capitals.csv"
+
+download.file(url, dest = "us_states.csv", method = "curl")
+
+us_states <- read.csv("us_states.csv")
+
+df <- data.frame(lat = us_states$latitude, lng = us_states$longitude) 
+
+mapStates = map("state", fill = TRUE, plot = FALSE)
+mapCounty = map("county", fill = TRUE, plot = FALSE)
+
+df %>%
+  leaflet() %>%
+  addProviderTiles("Stamen.Watercolor",
+                   options = providerTileOptions(noWrap = TRUE)) %>%
+  addPolygons(lng = mapStates$x,
+              lat = mapStates$y,
+              fillColor = rainbow(51, alpha = NULL), 
+              stroke = FALSE) %>%
+  addMarkers(popup = us_states$name) %>%
+  setView(lat = 39.18672, lng = -82.87537, zoom = 5)
+```
