@@ -1,4 +1,4 @@
-# DevelopingDataProducts
-Repository for the assignments of the Coursera course "Developing Data Products".
+# DevelopingDataProducts - assigment 1
+Subrepository for the assignment 1 of the Coursera course "Developing Data Products".
 
-At the following [link](https://matteo-tommasini.github.io/DevelopingDataProducts/index.html) you can find the first assignment.
+At the following [link](https://matteo-tommasini.github.io/DevelopingDataProducts/assignment_1/index.html) you can find the webpage (equivalently, you can simply download the corresponding html file in this folder).
