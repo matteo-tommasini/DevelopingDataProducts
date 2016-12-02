@@ -1,0 +1,67 @@
+---
+title: "Assignment 2 of the 'Developing Data Products' course on Coursera"
+author: "Matteo Tommasini"
+date: "December 2, 2016"
+output: ioslides_presentation
+---
+
+<style type="text/css">
+body, td {
+   font-size: 20px;
+}
+code.r{
+  font-size: 20px;
+}
+pre {
+  font-size: 16px
+}
+</style>
+
+## An example of plot created using plotly
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(plotly)
+url <- "https://raw.githubusercontent.com/plotly/datasets/master/school_earnings.csv"
+download.file(url, destfile = "earnings.csv")
+data <- read.csv("earnings.csv")
+University <- with(data, paste("University: ",School, sep =""))
+Men <- with(data, paste("Men = ", Men, sep = ""))
+Women <- with(data, paste("Women = ", Women, sep = ""))
+Gap <- with(data, paste("Gap = ", gap, sep = ""))
+data$Text <- paste(University, Men, Women, Gap, sep = "<br>")
+
+plot_ly(data, x = ~Women, y = ~Men, hoverinfo ="text", text = ~Text, type = 'scatter',
+        mode = 'markers', color = ~gap, colors = 'Blues',
+        marker = list(size = ~gap, opacity = 0.6)) %>%
+  layout(title = 'Gender Gap in Earnings per University',
+         xaxis = list(showgrid = TRUE, title = "medium annual income (Women)"),
+         yaxis = list(showgrid = TRUE, title = "medium annual income (Men)"))
+```
+
+*** 
+
+The chart in the previous slide was created by combining some of the [tutorials](https://plot.ly/r/bubble-charts/) of the plot.ly website. This is the complete code generating it.
+
+```{r, echo = TRUE, eval = FALSE}
+library(plotly)
+url <- "https://raw.githubusercontent.com/plotly/datasets/master/school_earnings.csv"
+download.file(url, destfile = "earnings.csv")
+data <- read.csv("earnings.csv")
+University <- with(data, paste("University: ",School, sep =""))
+Men <- with(data, paste("Men = ", Men, sep = ""))
+Women <- with(data, paste("Women = ", Women, sep = ""))
+Gap <- with(data, paste("Gap = ", gap, sep = ""))
+data$Text <- paste(University, Men, Women, Gap, sep = "<br>")
+# (continues)
+```
+
+***
+
+```{r, echo = TRUE, eval = FALSE}
+plot_ly(data, x = ~Women, y = ~Men, hoverinfo ="text", text = ~Text, type = 'scatter',
+        mode = 'markers', color = ~gap, colors = 'Blues',
+        marker = list(size = ~gap, opacity = 0.6)) %>%
+  layout(title = 'Gender Gap in Earnings per University',
+         xaxis = list(showgrid = TRUE, title = "medium annual income (Women)"),
+         yaxis = list(showgrid = TRUE, title = "medium annual income (Men)"))
+```

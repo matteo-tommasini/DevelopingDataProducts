@@ -1,5 +1,5 @@
 ---
-title: "First assignment of the 'Developing Data Products' course on Coursera"
+title: "Assignment 1 of the 'Developing Data Products' course on Coursera"
 author: "Matteo Tommasini"
 date: "November 30, 2016"
 output: html_document
