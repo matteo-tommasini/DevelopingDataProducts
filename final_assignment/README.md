@@ -1,8 +1,5 @@
-# DevelopingDataProducts - assigment 2
-
 # DevelopingDataProducts - Final Assigment
 Sub-repository for the [final assignment](https://www.coursera.org/learn/data-products/peer/tMYrn/course-project-shiny-application-and-reproducible-pitch) of the Coursera course "Developing Data Products".
-
 
 In this directory you can find all the files needed for creating the shinyApp for this assignment. The following links are also useful:
 
